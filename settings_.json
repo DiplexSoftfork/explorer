@@ -810,18 +810,18 @@
     "sample_data": {
       // blockindex: This value can be any valid block height number from your coins blockchain
       //             NOTE: This value is only used to build example api links on the api page from the /api/getblockhash api for example
-      "blockindex": 64152,
+      "blockindex": 6425,
       // blockhash: This value can be any valid block hash from your coins blockchain
-      //            For many bitcoin clones you can use the following cmd to get the block hash for a given block height: coin-cli getblockhash 64152
+      //            For many bitcoin clones you can use the following cmd to get the block hash for a given block height: coin-cli getblockhash 6425
       //            NOTE: This value is only used to build example api links on the api page from the /api/getblock api for example
-      "blockhash": "775d67da29dd6553268061f86368d06654944dd5d5c61db4c97e4c7960c11a74",
+      "blockhash": "b48a5aa8b72d10b6fd5b142166422516d0d07fd573b68c3bf95fce842b03e9ea",
       // txhash: This value can be any valid transaction hash from your coins blockchain
       //         For many bitcoin clones you can use the following cmd to find a list of tx hashes for a given block hash: coin-cli getblock 000000001ba119a0f6d49ebabd83343b125d7ee3d3184b1b41d6a7f2051153eb
       //         NOTE: This value is only used to build example api links on the api page from the /api/getrawtransaction api for example
-      "txhash": "6cb3babd256de253f926f10bc8574dadf0a3e2fc8380107b81eb07c67d1e73ed",
+      "txhash": "3654bc35567ed6e52ca3a96d312dc2dcbe1aa13bbbde6a438f01f3781a9fc0c8",
       // address: This value can be any valid wallet address from your coins blockchain that has received at least 1 or more coin transactions
       //          NOTE: This value is only used to build example api links on the api page from the /ext/getaddress api for example
-      "address": "ELvb8AZRgHmdsDnD1HYFwbSY4UkPhoECCW"
+      "address": "BC1muC1Vo173dWa8PJSSxax3Ad7bjAaWat"
     },
     // public_apis: a collection of settings that pertain to the public api command system
     //              NOTE: Disabling any of these apis will remove the api definition from the api page and will return a "This method is disabled" msg if the api endpoint is called.
@@ -895,7 +895,7 @@
         "getvotelist": {
           // enabled: Enable/disable the /api/getvotelist api endpoint (true/false)
           //          If set to false, the /api/getvotelist api will be completely disabled for public use (no definition on the api page and a disabled error msg if you try to call the endpoint directly)
-          "enabled": true
+          "enabled": false
         },
         // getmasternodecount: a collection of settings that pertain to the /api/getmasternodecount api endpoint
         //                     Returns a json object containing the total number of masternodes on the network (only applicable to masternode coins)
