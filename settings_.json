@@ -76,7 +76,7 @@
   },
 
   /* Shared page settings */
- 
+
   // shared_pages: a collection of settings that pertain to all webpages for the explorer
   "shared_pages": {
     // theme: Change the look & feel of the explorer with a unique theme. Uses bootswatch themes (https://bootswatch.com)
@@ -837,9 +837,13 @@
           //          If set to false, the /api/getdifficulty api will be completely disabled for public use (no definition on the api page and a disabled error msg if you try to call the endpoint directly)
           "enabled": true
         },
-	// getpeerinfo  <---
-	"getpeerinfo": {
-	  "enabled": true
+        // getpeerinfo  <---
+        "getpeerinfo": {
+          "enabled": true
+        },
+        // mnsync  <---
+        "mnsync": {
+          "enabled": true
         },
         // getconnectioncount: a collection of settings that pertain to the /api/getconnectioncount api endpoint
         //                     Returns the number of connections to other nodes
@@ -1077,11 +1081,11 @@
     //         BALANCES : get the supply by running a query on the addresses collection and summing up all positive balances (potentially a long running query for blockchains with tons of addresses)
     //         TXOUTSET : retrieved from gettxoutsetinfo rpc cmd
     "supply": "GETINFO"
-  },
+   },
 
-  // labels: a collection of settings that pertain to the list of customized wallet address labels
-  //         Adding entries to this section will display a custom label beside each affected wallet address when displayed in the explorer
-  //         NOTE: You can add as many address labels as desired
+   // labels: a collection of settings that pertain to the list of customized wallet address labels
+   //         Adding entries to this section will display a custom label beside each affected wallet address when displayed in the explorer
+   //         NOTE: You can add as many address labels as desired
   "labels": {
     // A collection of settings that pertain to the EJ6yc47cAZMGWHFccc9gfGbDLYuyNhP6wL wallet address
     // NOTE: Change this value to the wallet address that you would like to set a custom label on
@@ -1174,6 +1178,8 @@
     "getinfo": "getinfo",
     // getpeerinfo: Returns data about each connected network node as a json array of objects
     "getpeerinfo": "getpeerinfo",
+    // mnsync:
+    "mnsync": "mnsync",
     // gettxoutsetinfo: Returns an object with statistics about the unspent transaction output set
     "gettxoutsetinfo": "gettxoutsetinfo",
     // getvotelist: Returns an object with details regarding the current vote list
@@ -1257,9 +1263,6 @@
       //              NOTE: If the "api_page.enabled" setting is set to false, these apis will be completely disabled and will return a "This method is disabled" msg if the api endpoint is called.
       //                    Disabling any of these apis will remove the api definition from the api page and will return a "This method is disabled" msg if the api endpoint is called.
       "public_apis": {
-        "getpeerinfo": {
-	  "enabled": true
-        },
         // getmaxmoney: a collection of settings that pertain to the /api/getmaxmoney api endpoint
         //              Returns the number of coins that will be produced in total
         //              NOTE: This api is not used internally and is therefore only publicly available
