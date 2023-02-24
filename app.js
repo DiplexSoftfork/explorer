@@ -163,6 +163,53 @@ app.use('/ext/getaddress/:hash', function(req, res) {
     res.end('This method is disabled');
 });
 
+app.use('/ext/utxo/:hash', function(req, res) {
+  // check if the utxo api is enabled
+  if (settings.api_page.enabled == true && settings.api_page.public_apis.ext.utxo.enabled == true) {
+    db.get_address(req.params.hash, false, function(address) {
+      db.get_address_txs_ajax(req.params.hash, 0, settings.api_page.public_apis.ext.getaddresstxs.max_items_per_query, function(txs, count) {
+        if (address) {
+          var last_txs = [];
+
+          for (i = 0; i < txs.length; i++) {
+            if (typeof txs[i].txid !== "undefined") {
+              var out = 0,
+                  vin = 0,
+                  tx_type = 1,
+                  row = {};
+
+                txs[i].vout.forEach(function (r) {
+                  if (r.addresses == req.params.hash)
+                    out += r.amount;
+                });
+
+                txs[i].vin.forEach(function (s) {
+                  if (s.addresses == req.params.hash)
+                    vin += s.amount;
+                });
+
+              if (vin > out){
+                tx_type = 0;
+                row["value"] = vin;
+              }
+              else{
+                   row["value"] = out;
+              }
+              row['txid'] = txs[i].txid;
+              row['vout'] = tx_type;
+              last_txs.push(row);
+            }
+          }
+
+          res.send(last_txs);
+        } else
+          res.send({ error: 'address not found.', hash: req.params.hash});
+      });
+    });
+  } else
+    res.end('This method is disabled');
+});
+
 app.use('/ext/gettx/:txid', function(req, res) {
   // check if the gettx api is enabled
   if (settings.api_page.enabled == true && settings.api_page.public_apis.ext.gettx.enabled == true) {
