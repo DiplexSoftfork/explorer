@@ -217,8 +217,9 @@ app.use('/ext/gettx/:txid', function(req, res) {
 
     db.get_tx(txid, function(tx) {
       if (tx) {
-        lib.get_blockcount(function(blockcount) {
-          res.send({ active: 'tx', tx: tx, confirmations: settings.shared_pages.confirmations, blockcount: (blockcount ? blockcount : 0)});
+        lib.get_blockcount(function(blockcount) { //settings.shared_pages.confirmations
+            var confirm = blockcount - tx.blockindex;
+            res.send({ active: 'tx', tx: tx, confirmations: confirm, blockcount: (blockcount ? blockcount : 0)});
         });
       } else {
         lib.get_rawtransaction(txid, function(rtx) {
@@ -237,7 +238,7 @@ app.use('/ext/gettx/:txid', function(req, res) {
                       blockindex: -1
                     };
 
-                    res.send({ active: 'tx', tx: utx, confirmations: settings.shared_pages.confirmations, blockcount:-1});
+                    res.send({ active: 'tx', tx: utx, confirmations: rtx.confirmations, blockcount:-1});
                   } else {
                     var utx = {
                       txid: rtx.txid,
@@ -250,7 +251,7 @@ app.use('/ext/gettx/:txid', function(req, res) {
                     };
 
                     lib.get_blockcount(function(blockcount) {
-                      res.send({ active: 'tx', tx: utx, confirmations: settings.shared_pages.confirmations, blockcount: (blockcount ? blockcount : 0)});
+                      res.send({ active: 'tx', tx: utx, confirmations: rtx.confirmations, blockcount: (blockcount ? blockcount : 0)});
                     });
                   }
                 });
