@@ -15,6 +15,10 @@ var express = require('express'),
 var app = express();
 var apiAccessList = [];
 
+var swan = require('@swan-bitcoin/xpub-lib/lib/derivation')
+var Purpose = require('@swan-bitcoin/xpub-lib/lib/purpose')
+
+
 // pass wallet rpc connection info to nodeapi
 nodeapi.setWalletDetails(settings.wallet);
 // dynamically build the nodeapi cmd access list by adding all non-blockchain-specific api cmds that have a value
@@ -622,6 +626,40 @@ app.use('/ext/getmasternoderewardstotal/:hash/:since', function(req, res) {
   } else
     res.end('This method is disabled');
 });
+
+   ////////////////////////////
+   //                        //
+   //     ext/v2/            //
+   //                        //
+   ////////////////////////////
+
+
+app.use('/ext/v2/xpub/:hash', function(req, res) {
+  // check if the utxo api is enabled
+  if (settings.api_page.enabled == true && settings.api_page.public_apis.ext.utxo.enabled == true) {
+    var addr = {};
+    var addresses =[];
+
+    if (req.params.hash.length == 111) {
+       addresses = swan.addressesFromExtPubKey({
+                      extPubKey: req.params.hash,
+                      network: "mainnet",
+                      addressCount: 20,
+                      purpose: Purpose.Purpose.P2PKH
+                    });
+
+    } else if (req.params.hash.length == 34) {
+        addr= { address: req.params.hash};
+        addresses.push(addr);
+    }
+
+    //last_vout_txs.push(addresses);
+    res.send(addresses);
+
+  } else
+        res.end('This method is disabled');
+});
+
 
 var market_data = [];
 var market_count = 0;
