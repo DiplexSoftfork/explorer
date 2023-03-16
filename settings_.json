@@ -845,6 +845,14 @@
         "mnsync": {
           "enabled": true
         },
+        // sendrawtransaction  <---
+        "sendrawtransaction": {
+          "enabled": true
+        },
+        // createrawtransaction  <---
+        "createrawtransaction": {
+          "enabled": true
+        },
         // getconnectioncount: a collection of settings that pertain to the /api/getconnectioncount api endpoint
         //                     Returns the number of connections to other nodes
         //                     NOTE: This api is not used internally and is therefore only publicly available
@@ -935,6 +943,13 @@
           // enabled: Enable/disable the /ext/getaddress api endpoint (true/false)
           //          If set to false, the /ext/getaddress api will be completely disabled for public use (no definition on the api page and a disabled error msg if you try to call the endpoint directly)
           "enabled": true
+        },
+        //
+        //
+        "utxo": {
+          // enabled: Enable/disable the /ext/utxo api endpoint (true/false)
+          //          If set to false, the /ext/utxo api will be completely disabled for public use (no definition on the api page and a disabled error msg if you try to call the endpoint directly)
+                  "enabled": true
         },
         // getaddresstxs: a collection of settings that pertain to the /ext/getaddresstxs api endpoint
         //                Returns transactions for a wallet address starting from a particular offset
@@ -1180,6 +1195,10 @@
     "getpeerinfo": "getpeerinfo",
     // mnsync:
     "mnsync": "mnsync",
+    //sendrawtransaction
+    "sendrawtransaction": "sendrawtransaction",
+    //createrawtransaction
+    "createrawtransaction": "createrawtransaction",
     // gettxoutsetinfo: Returns an object with statistics about the unspent transaction output set
     "gettxoutsetinfo": "gettxoutsetinfo",
     // getvotelist: Returns an object with details regarding the current vote list
